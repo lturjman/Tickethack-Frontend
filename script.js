@@ -37,11 +37,12 @@
   document.querySelector('#search-button').addEventListener('click', () => {
     
 
-    listeHoraires(dataRecup);
-    return;
+    //listeHoraires(dataRecup);
+    //return;
+
     const departure = document.querySelector('#departure').value;
     const arrival = document.querySelector('#arrival').value;
-    const date = document.querySelector('#date').value;
+    const date = document.querySelector('#trip-date').value;
   
     if (!departure || !arrival || !date) {
       console.error("Tous les champs doivent être renseignés.");
@@ -49,9 +50,10 @@
     }
   
     // Construction manuelle de la query string avec encodage
+    // localhost:3000/trips/search?departure=Paris&arrival=bruxelles&date=2025-03-11
     const queryString = `?departure=${encodeURIComponent(departure)}&arrival=${encodeURIComponent(arrival)}&date=${encodeURIComponent(date)}`;
     const url = `http://localhost:3000/trips/search${queryString}`;
-  
+    
     fetch(url, { method: 'GET' })
       .then(response => {
         if (!response.ok) {
@@ -62,6 +64,7 @@
         return response.json();
       })
       .then(data => {
+        console.log(data);
         listeHoraires(data);
       })
       .catch(error => {
@@ -74,10 +77,10 @@
 function listeHoraires(data) {
   let sHTML = ''
 
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < data.trips.length; i++) {
     // on crée une ligne de liste, avec un intitulé, un bouton, et un id de dataset 
     sHTML += `<li id="trip-${data[i]._id}">
-  ${data[i].departure} > ${data[i].arrival} à ${getHoursAndMinutes(data[i].date)} : 
+  ${data.trips[i].departure} > ${data.trips[i].arrival} à ${getHoursAndMinutes(data.trips[i].date)} : 
   <span class="price">${data[i].price} €</span>
   <button class="book-btn" data-id="${data[i]._id}">Book</button>
 </li>`;
