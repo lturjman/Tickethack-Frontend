@@ -1,14 +1,51 @@
 <!DOCTYPE html>
-<html lang="fr">
-
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tickethack</title>
+  <link rel="stylesheet" href="style.css">
+  <style src = "style.css"></style>
 </head>
-
 <body>
+  <header>
+    <h1 id="title">Tickethack</h1>
+    <nav>
+      <a href="#">Cart</a> | <a href="#">Bookings</a>
+    </nav>
+  </header>
 
+  <div id="slogan-area">
+    <h2>Explore the world effortlessly by train !</h2>
+    <h3 id="sub-slogan">Compare, book and enjoy cheap prices for train tickets : your journey starts on Tickedhack</h3>
+  </div>
+
+  <main>
+    <div id="flex-container">
+      <div id="search-block">
+ 
+        <input type="text" placeholder="Departure" id="departure"><br>
+
+        <input type="text" placeholder = "Arrival" id="arrival"><br>
+  
+        <input type="date" placeholder = "Date" id="trip-date"><br>
+        <button id="search-button">Search</button>
+      </div>
+
+      <div id="center-block">
+        <img src="./images/train.png" alt="Train icon">
+        <p>It's time to book your...</p>
+      </div>
+
+      <div id="results-block">
+        <ul>
+          <li>Paris &gt; Lyon 18:48 81€ <button>Book</button></li>
+          <li>Paris &gt; Lyon 19:00 82€ <button>Book</button></li>
+          <li>Paris &gt; Lyon 19:30 85€ <button>Book</button></li>
+        </ul>
+      </div>
+    </div>
+  </main>
 </body>
-
+<script src="script.js"></script>
 </html>
