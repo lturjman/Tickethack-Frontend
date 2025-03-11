@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tickethack</title>
+  <title>Tickethack - Cart</title>
   <link rel="stylesheet" href="style.css">
-  <style src = "style.css"></style>
 </head>
 <body>
   <header>
@@ -14,38 +13,30 @@
       <a href="#">Cart</a> | <a href="#">Bookings</a>
     </nav>
   </header>
-
-  <div id="slogan-area">
-    <h2>Explore the world effortlessly by train !</h2>
-    <h3 id="sub-slogan">Compare, book and enjoy cheap prices for train tickets : your journey starts on Tickedhack</h3>
-  </div>
-
-  <main>
-    <div id="flex-container">
-      <div id="search-block">
- 
-        <input type="text" placeholder="Departure" id="departure"><br>
-
-        <input type="text" placeholder = "Arrival" id="arrival"><br>
   
-        <input type="date" placeholder = "Date" id="trip-date"><br>
-        <button id="search-button">Search</button>
-      </div>
-
-      <div id="center-block">
-        <img src="./images/train.png" alt="Train icon">
-        <p>It's time to book your...</p>
-      </div>
-
-      <div id="results-block">
-        <ul id ="results">
-          <li>Paris &gt; Lyon 18:48 81€ <button>Book</button></li>
-          <li>Paris &gt; Lyon 19:00 82€ <button>Book</button></li>
-          <li>Paris &gt; Lyon 19:30 85€ <button>Book</button></li>
-        </ul>
+  <main>
+    <div id="cart-container">
+      <h2>My cart</h2>
+      <ul id="cart-items">
+        <li>
+          <span>Paris &gt; Lyon</span>
+          <span>20:09</span>
+          <span>103€</span>
+          <button class="remove-btn">X</button>
+        </li>
+        <li>
+          <span>Marseille &gt; Lyon</span>
+          <span>22:10</span>
+          <span>127€</span>
+          <button class="remove-btn">X</button>
+        </li>
+      </ul>
+      <div id="cart-total">
+        <span>Total : 230€</span>
+        <button id="purchase-btn">Purchase</button>
       </div>
     </div>
   </main>
 </body>
-<script src="script.js"></script>
+<script src="cart.js"></script>
 </html>
