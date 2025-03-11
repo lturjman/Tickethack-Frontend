@@ -7,19 +7,21 @@ body {
 
 nav {
   padding-right: 30px; /* Ajoute un padding à droite pour éviter que les liens soient trop collés */
+  margin-right : 30px;
+  
 }
-
 .nav-link {
   text-decoration: none;
   font-weight: bold;
   color: black;
   font-size: 1em;
-  margin-left: 15px; /* Espacement entre les liens */
+  transition: color 0.3s ease-in-out;
 }
 
 .nav-link:hover {
-  color: #008CBA; /* Changement de couleur au survol */
+  color: #008CBA; /* Effet au survol */
 }
+
 
 
 header {
