@@ -60,9 +60,9 @@ h3 {
 
 #flex-container {
   display: flex;
-  justify-content: space-around;
+  justify-content:center;
   padding: 40px;
-  gap: 40px;
+  gap: 5vw;
 }
 
 #search-block, #center-block, #results-block {
