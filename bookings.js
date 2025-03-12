@@ -1,3 +1,4 @@
+import CONFIG from './config.js';
 
 // on veut revenir a l'index si on clique sur le titre
 document.querySelector('#title').addEventListener('click',()=>{
@@ -34,7 +35,7 @@ function remplirBookings(){
     let itemsUL = document.querySelector('#booking-items'); // Assurez-vous que l'ID est correct
     itemsUL.innerHTML = '';
 
-    fetch('http://localhost:3000/bookings')
+    fetch(`${CONFIG.API_BASE_URL}/bookings`)
     .then(response => response.json())
     .then(books => {
         console.log("Données reçues :", books);
@@ -45,7 +46,8 @@ function remplirBookings(){
             console.log("Le trip en cours est :", curbook);
 
             let curLI = `<li>
-                <span>${curbook.departure} &gt; ${curbook.arrival}</span>
+                <img src="./images/train.png" width=32 height=32>
+                <span> ${curbook.departure} &gt; ${curbook.arrival}</span>
                 <span>${getTrainHour(curbook.date)}</span>
                 <span>${dateDelai(curbook.date)}</span>
                 <span>${curbook.price} €</span>

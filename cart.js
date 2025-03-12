@@ -1,3 +1,4 @@
+import CONFIG from './config.js';
 
 // on veut revenir a l'index si on clique sur le titre
 document.querySelector('#title').addEventListener('click',()=>{
@@ -9,7 +10,7 @@ function remplirPanier(){
     let itemsUL = document.querySelector('#cart-items')
     itemsUL.innerHTML = ''
     let total = 0
-    fetch('http://localhost:3000/carts').then(data=>data.json()).then(cartitems=>{
+    fetch(`${CONFIG.API_BASE_URL}/carts`).then(data=>data.json()).then(cartitems=>{
         itemsUL.innerHTML = `<li>
           <span>TRAJET</span>
           <span>HORAIRE</span>
@@ -44,7 +45,7 @@ document.querySelector('#cart-items').addEventListener('click', function(event) 
         let idobject = event.target.dataset.cartid
         console.log("a supprimer : " + idobject)
         // et on fetch notre demande de suppression de l'objet
-        fetch(`http://localhost:3000/carts/remove/${idobject}`, {
+        fetch(`${CONFIG.API_BASE_URL}/carts/remove/${idobject}`, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json'
@@ -72,7 +73,7 @@ document.querySelector('#cart-items').addEventListener('click', function(event) 
 
 // clic sur le bouton purchase, qui envoie l'ordre /purchase au backend, et redirige vers la booking.html
   document.querySelector('#purchase-btn').addEventListener('click', function() {
-      fetch(`http://localhost:3000/bookings/purchase`, { method: 'POST' })
+      fetch(`${CONFIG.API_BASE_URL}/bookings/purchase`, { method: 'POST' })
           .then(() => window.location.assign("./bookings.html")); // Redirection après validation
   });
   

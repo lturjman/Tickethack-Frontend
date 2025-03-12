@@ -1,7 +1,9 @@
+import CONFIG from './config.js';
+
+
 document.addEventListener("DOMContentLoaded", function() {
   let today = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
   document.getElementById("trip-date").value = today; // Définit la date par défaut
-  document.getElementById("departure").focus(); // 
 });
 
 
@@ -19,7 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // Construction manuelle de la query string avec encodage
     // localhost:3000/trips/search?departure=Paris&arrival=bruxelles&date=2025-03-11
     const queryString = `?departure=${encodeURIComponent(departure)}&arrival=${encodeURIComponent(arrival)}&date=${encodeURIComponent(date)}`;
-    const url = `http://localhost:3000/trips/search${queryString}`;
+    console.log("on search sur : " + `${CONFIG.API_BASE_URL}/trips/search${queryString}`)
+    const url = `${CONFIG.API_BASE_URL}/trips/search${queryString}`;
     
     fetch(url, { method: 'GET' })
       .then(response => {
@@ -91,7 +94,7 @@ document.querySelector('#results').addEventListener('click', function(event) {
     console.log("Réserver le trajet avec l'id :", tripId);
 
     // Effectuer la requête fetch avec la bonne syntaxe
-    fetch(`http://localhost:3000/carts/add/${tripId}`, {
+    fetch(`${CONFIG.API_BASE_URL}/carts/add/${tripId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
