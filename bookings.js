@@ -10,12 +10,7 @@ function remplirPanier(){
     itemsUL.innerHTML = ''
 
     fetch('http://localhost:3000/bookings').then(data=>data.json()).then(books=>{
-        itemsUL.innerHTML = `<li>
-          <span>TRAJET</span>
-          <span>HORAIRE</span>
-          <span>TARIF</span>
-          <span>DEPART</span>
-        </li>`    
+        itemsUL.innerHTML = ''   
     
         for(let i=0;i<books.length;i++){     
             // on extrait le trip en cours
@@ -25,9 +20,8 @@ function remplirPanier(){
             
             let curLI = `<li>
           <span>${curbook.departure} &gt; ${curbook.arrival}</span>
-          <span>Départ le ${formatDate(curbook.date)}</span>
+          <span>Départ le ${dateDelai(curbook.date)}</span>
           <span>${curbook.price} €</span>
-          <button class="remove-btn" data-cartId= ${curbook._id}>X</button>
         </li>`
         itemsUL.innerHTML += curLI
         }
@@ -40,4 +34,20 @@ remplirPanier()
 
 function formatDate(dateString) {
     return moment(dateString).locale('fr').format('D MMMM YYYY à HH[h]mm');
+}
+
+// pour afficher un texte basé sur la date
+function dateDelai(dateSource) {
+    let maintenant = moment(); // Temps actuel
+    let dateDepart = moment(dateSource); // Convertir dateSource en Moment.js
+
+    if (dateDepart.isBefore(maintenant)) {
+        // Train déjà parti
+        let diff = moment.duration(maintenant.diff(dateDepart));
+        return `Gone ${diff.hours()} hours & ${diff.minutes()} min. before`;
+    } else {
+        // Train dans le futur
+        let diff = moment.duration(dateDepart.diff(maintenant));
+        return `Departure in ${diff.hours()} hours & ${diff.minutes()} mins.`;
+    }
 }

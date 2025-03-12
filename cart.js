@@ -68,20 +68,12 @@ document.querySelector('#cart-items').addEventListener('click', function(event) 
     })
 
 
-
-document.querySelector('#purchase-btn').addEventListener('click', function(event) {
-
-    // on fetch tout simplement, ordre de valider le panier
-    fetch(`http://localhost:3000/bookings/purchase`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(cartitems)
-      })
-    })
-
-
+// clic sur le bouton purchase, qui envoie l'ordre /purchase au backend, et redirige vers la booking.html
+  document.querySelector('#purchase-btn').addEventListener('click', function() {
+      fetch(`http://localhost:3000/bookings/purchase`, { method: 'POST' })
+          .then(() => window.location.assign("./bookings.html")); // Redirection après validation
+  });
+  
 
 // on la déclenche au chargement de la page
 remplirPanier()
