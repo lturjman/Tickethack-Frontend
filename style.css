@@ -22,8 +22,6 @@ nav {
   color: #008CBA; /* Effet au survol */
 }
 
-
-
 header {
   background-color: white;
   color: black;
@@ -78,12 +76,14 @@ h3 {
   background-color: #ffffff;
   flex: 1;
   text-align: center;
+  max-width: 400px;
 }
 
 #center-block {
   background-color: #ffffff;
   flex: 1;
   text-align: center;
+  max-width: 400px;
 }
 
 #results-block {
@@ -91,6 +91,11 @@ h3 {
   flex: 1;
   color: white;
   text-align: center;
+  max-height = 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display:none;
+  max-width: 600px;
 }
 
 button {
@@ -134,17 +139,114 @@ input[type="text"], input[type="date"] {
 ul {
   list-style: none;
   padding: 0;
+  margin:0;
+  width:100%
 }
 
 li {
   margin: 10px 0;
-  padding: 15px;
+  padding: 5px;
   background: #ffffff;
   color: black;
-  border-radius: 8px;
+  border-radius: 3px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 
+/* pour forcer les liens du menu à ne pas s'afficher en bleu souligné (dur)*/
+.container {
+  display: flex;
+  gap: 0.625%;
+}
+
+a {
+  flex: 1;
+  text-decoration: none;
+  outline-color: transparent;
+  text-align: center;
+  line-height: 3;
+  color: black;
+  padding:5px;
+}
+
+a:link,
+a:visited,
+a:focus {
+  background: rgb(255, 255, 255);
+  color: black;
+}
+
+a:hover {
+  background: rgb(124, 183, 147);
+}
+
+a:active {
+  background: rgb(124, 220, 79);
+  color: white;
+}
+
+#price {
+  background-color: rgb(200, 214, 209);
+  padding:5px;
+}
+
+/* pour panier*/
+#cart-container {
+  max-width: 50%;
+  margin: 40px auto; /* Centre la box horizontalement */
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Mise en forme des éléments du panier */
+#cart-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#cart-items li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #f8f8f8;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* Boutons de suppression */
+.remove-btn {
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Bandeau bleu marine contenant le total et le bouton Purchase */
+#cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #001F3F; /* Bleu marine */
+  color: white;
+  padding: 15px;
+  border-radius: 0 0 15px 15px;
+  margin-top: 10px;
+}
+
+/* Bouton Purchase bien positionné */
+#purchase-btn {
+  background-color: #2ECC71;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}

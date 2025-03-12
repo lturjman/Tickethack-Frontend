@@ -1,45 +1,6 @@
 
-// fetch("http://localhost:3000/api/message")
-//   .then((response) => response.json())
-//   .then((data) => console.log(data.message))
-//   .catch((error) => console.error("Erreur :", error));
-
-
-  // appel de la route trip pour récupérer la liste des trips
- /* document.querySelector('#search-button').addEventListener('click', () => {
-    fetch("http://localhost:3000/trips/search", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        departure: document.querySelector('#departure').value,
-        arrival: document.querySelector('#arrival').value
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      listeHoraires(data);
-    })
-    .catch(error => {
-      console.error('Erreur :', error);
-    });
-  });*/
-
-  const dataRecup =[
-    {"_id":"10","departure":"Lyon","arrival":"Bruxelles","date":{"$date":"2025-03-11T12:04:49.884Z"},"price":57},
-    {"_id":"11","departure":"Bruxelles","arrival":"Paris","date":{"$date":"2025-03-11T12:10:34.257Z"},"price":140},
-    {"_id":"12","departure":"Marseille","arrival":"Lyon","date":{"$date":"2025-03-11T12:48:08.556Z"},"price":58},
-    {"_id":"13","departure":"Bruxelles","arrival":"Lyon","date":{"$date":"2025-03-11T12:53:57.862Z"},"price":117},
-    {"_id":"14","departure":"Paris","arrival":"Bruxelles","date":{"$date":"2025-03-11T12:58:04.974Z"},"price":92}
-  ]
-
   document.querySelector('#search-button').addEventListener('click', () => {
     
-
-    //listeHoraires(dataRecup);
-    //return;
-
     const departure = document.querySelector('#departure').value;
     const arrival = document.querySelector('#arrival').value;
     const date = document.querySelector('#trip-date').value;
@@ -64,32 +25,45 @@
         return response.json();
       })
       .then(data => {
-        console.log(data);
-        listeHoraires(data);
+        if(data.trips.length > 0){
+          listeHoraires(data.trips);
+          document.querySelector('#picto').src = './images/train.png';
+          document.querySelector('#picto-text').textContent = "It's time to book your..."
+            // on a des résutlats à afficher alors on réaffiche le bloc
+            document.querySelector('#results-block').style.display='flex';
+            // et on masque le bloc central (qui contient le gros picto)
+            document.querySelector('#center-block').style.display='none';
+        }
+        else
+        {
+          // on, a rien trouvé, alor on masque les résultats
+          document.querySelector('#results-block').style.display='none';
+          // et on réaffiche le bloc central (qui contient le gros picto)
+          document.querySelector('#center-block').style.display='flex';
+
+          document.querySelector('#picto').src = './images/notfound.png';
+          document.querySelector('#picto-text').textContent = "No trip found."
+
+        }
       })
       .catch(error => {
         console.error('Erreur :', error);
       });
   });
   
-  
-
-function listeHoraires(data) {
+function listeHoraires(trips) {
   let sHTML = ''
 
-  for (let i = 0; i < data.trips.length; i++) {
+  for (let i = 0; i < trips.length; i++) {
     // on crée une ligne de liste, avec un intitulé, un bouton, et un id de dataset 
-    sHTML += `<li id="trip-${data[i]._id}">
-  ${data.trips[i].departure} > ${data.trips[i].arrival} à ${getHoursAndMinutes(data.trips[i].date)} : 
-  <span class="price">${data[i].price} €</span>
-  <button class="book-btn" data-id="${data[i]._id}">Book</button>
+    sHTML += `<li id="trip-${trips[i]._id}">
+  ${trips[i].departure} > ${trips[i].arrival} à ${getHoursAndMinutes(trips[i].date)} : 
+  <span class="price">${trips[i].price} €</span>
+  <button class="book-btn" data-id="${trips[i]._id}">✚ Book ${trips[i]._id}</button>
 </li>`;
 
   }
   document.querySelector('#results').innerHTML = sHTML
-  
-
-  console.log(data);
 }
 
 function getHoursAndMinutes(dateInput) {
@@ -104,13 +78,35 @@ function getHoursAndMinutes(dateInput) {
   return `${hours}:${minutes}`;
 }
 
-
 document.querySelector('#results').addEventListener('click', function(event) {
   // Vérifier si l'élément cliqué est un bouton avec la classe "book-btn"
   if (event.target.matches('.book-btn')) {
     const tripId = event.target.dataset.id;
     console.log("Réserver le trajet avec l'id :", tripId);
-    // Placez ici la logique pour traiter la réservation
+
+    // Effectuer la requête fetch avec la bonne syntaxe
+    fetch(`http://localhost:3000/carts/add/${tripId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Erreur lors de la réservation du trajet");
+      }
+      window.location.assign("./cart.html")
+      return response.json();
+      
+    })
+    .then(data => {
+      console.log("Réponse du serveur :", data);
+    })
+    .catch(error => {
+      console.error("Erreur :", error);
+    });
   }
 });
+
+
 
