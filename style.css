@@ -99,7 +99,7 @@ h3 {
 }
 
 button {
-  background-color: #008CBA;
+  background-color: #2ca887;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -202,6 +202,16 @@ a:active {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+#booking-container
+{
+  max-width: 80%;
+  margin: 40px auto; /* Centre la box horizontalement */
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
 /* Mise en forme des éléments du panier */
 #cart-items {
   list-style: none;
@@ -214,7 +224,7 @@ a:active {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background: #f8f8f8;
+  background: #e3f2e9;
   border-radius: 8px;
   margin-bottom: 10px;
 }
@@ -249,4 +259,35 @@ a:active {
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 5px;
+}
+
+#booking-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+#booking-items li {
+  display: flex;
+  justify-content: space-between; /* Espacement automatique entre les éléments */
+  align-items: center; /* Alignement vertical */
+  padding: 15px;
+  background: #e3f2e9;
+  color: black;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-sizing: border-box; /* Évite que le padding casse la largeur */
+  font-size: 1em;
+}
+
+#booking-items li span {
+  flex: 1; /* Chaque élément prend une portion égale */
+  text-align: center; /* Centrage du texte */
+}
+
+/* Spécifique pour les prix, pour qu'ils restent à droite */
+#booking-items li span:last-child {
+  text-align: right;
+  flex: 0.5;
 }

@@ -8,7 +8,7 @@ document.querySelector('#title').addEventListener('click',()=>{
 function remplirPanier(){
     let itemsUL = document.querySelector('#cart-items')
     itemsUL.innerHTML = ''
-
+    let total = 0
     fetch('http://localhost:3000/carts').then(data=>data.json()).then(cartitems=>{
         itemsUL.innerHTML = `<li>
           <span>TRAJET</span>
@@ -27,10 +27,12 @@ function remplirPanier(){
           <span>${curtrip.trip.departure} &gt; ${curtrip.trip.arrival}</span>
           <span>Départ le ${formatDate(curtrip.trip.date)}</span>
           <span>${curtrip.trip.price} €</span>
-          <button class="remove-btn" data-cartid= ${curtrip._id}>Supprimer ${curtrip._id}</button>
+          <button class="remove-btn" data-cartid= ${curtrip._id}>X</button>
         </li>`
+        total+=curtrip.trip.price
         itemsUL.innerHTML += curLI
         }
+        document.querySelector("#total").innerHTML = "Total : " + total + " €"
     }
     )
 }

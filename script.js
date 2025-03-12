@@ -1,3 +1,9 @@
+document.addEventListener("DOMContentLoaded", function() {
+  let today = new Date().toISOString().split('T')[0]; // Format YYYY-MM-DD
+  document.getElementById("trip-date").value = today; // Définit la date par défaut
+  document.getElementById("departure").focus(); // 
+});
+
 
   document.querySelector('#search-button').addEventListener('click', () => {
     
@@ -59,7 +65,7 @@ function listeHoraires(trips) {
     sHTML += `<li id="trip-${trips[i]._id}">
   ${trips[i].departure} > ${trips[i].arrival} à ${getHoursAndMinutes(trips[i].date)} : 
   <span class="price">${trips[i].price} €</span>
-  <button class="book-btn" data-id="${trips[i]._id}">✚ Book ${trips[i]._id}</button>
+  <button class="book-btn" data-id="${trips[i]._id}">✚ Book </button>
 </li>`;
 
   }
